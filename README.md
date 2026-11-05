@@ -1,2 +1,5 @@
-# vault-media.github.io
-Privacy Policy and Support Website for VaultMedia and the MediaVault+ App.
+# VaultMedia website
+
+Source for https://vault-media.github.io: the VaultMedia company page and the MediaVault+ privacy policy and support pages.
+
+Contact: yourvaultmedia@gmail.com
