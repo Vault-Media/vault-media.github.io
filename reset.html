@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reset password · MediaVault+</title>
+<meta name="description" content="Open MediaVault+ to choose a new password.">
+<meta name="color-scheme" content="dark light">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self'; script-src 'sha256-vDFVZ3BDzFEIzzhblH+as4H4rYf4hEuNMIHvDy9QHAE='; base-uri 'none'; form-action 'none'">
+<link rel="stylesheet" href="/style.css">
+<style>
+  .open-app { display: inline-block; margin: 8px 0 20px; padding: 14px 28px; border-radius: 10px; background: var(--pink); color: #FFFFFF; font-weight: 700; text-decoration: none; }
+  .open-app:hover { color: #FFFFFF; text-decoration: underline; }
+  .open-app[hidden] { display: none; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="/" aria-label="MediaVault+ home">MediaVault<span class="plus">+</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="/">App</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/support.html">Support</a>
+      <a href="/vaultmedia/">VaultMedia</a>
+    </nav>
+  </div>
+</header>
+<div class="page">
+<main id="main" class="wrap" style="padding-top: clamp(32px, 6vw, 56px);">
+    <article class="prose">
+      <h1>Reset your password</h1>
+      <p id="status">Opening MediaVault+…</p>
+      <a id="open-app" class="open-app" href="#" hidden>Open MediaVault+</a>
+      <p>Open this link on the phone where MediaVault+ is installed.</p>
+      <p id="invalid" hidden>This reset link is incomplete. Request a new one from the MediaVault+ sign-in screen.</p>
+    </article>
+  </main>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <span><span class="company">VaultMedia</span> · <span class="year">© 2026</span></span>
+    <nav aria-label="Footer">
+      <a href="/">MediaVault<span class="plus">+</span></a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/support.html">Support</a>
+    </nav>
+  </div>
+</footer>
+<script>
+// Hand-off from the Supabase Reset Password email to the app. The token hash arrives in the URL fragment (never sent to this web
+// server), is checked here, removed from the address bar, and passed only to the app's own vhsvault:// link. Nothing else loads.
+(function () {
+  var params = new URLSearchParams(location.hash.replace(/^#/, ''));
+  var tokenHash = params.get('token_hash') || '';
+  var type = params.get('type') || '';
+  // Clear the fragment so the token does not stay in the address bar or browser history entry.
+  try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { /* ignore */ }
+
+  var status = document.getElementById('status');
+  if (!/^[A-Za-z0-9_-]{16,128}$/.test(tokenHash) || type !== 'recovery') {
+    status.hidden = true;
+    document.getElementById('invalid').hidden = false;
+    return;
+  }
+  var appLink = 'vhsvault://auth-callback?token_hash=' + encodeURIComponent(tokenHash) + '&type=recovery';
+  var button = document.getElementById('open-app');
+  button.setAttribute('href', appLink);
+  button.hidden = false;
+  status.textContent = "If the app didn't open, tap the button.";
+  location.href = appLink;
+})();
+</script>
+</body>
+</html>
