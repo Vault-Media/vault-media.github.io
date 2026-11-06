@@ -196,7 +196,7 @@ main { padding-block: 8px 64px; }
 .prose p { margin: 0 0 1em; }
 .prose strong { color: var(--cyan); font-weight: 600; }
 .prose strong.red { color: var(--pink); }
-.prose ul { padding-left: 1.2em; margin: 0 0 1em; display: grid; gap: 0.6em; }
+.prose ul, .prose ol { padding-left: 1.2em; margin: 0 0 1em; display: grid; gap: 0.6em; }
 .prose li::marker { color: var(--pink); }
 .meta { font-family: var(--font-mono); font-size: var(--step--1); color: var(--fg-3); letter-spacing: 0.06em; margin: 0 0 28px; }
 
