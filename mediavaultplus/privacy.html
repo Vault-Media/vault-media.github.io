@@ -2,104 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Privacy Policy · MediaVault+</title>
-<meta name="description" content="How MediaVault+ handles your information, who it is shared with, and how to delete your account.">
-<meta name="color-scheme" content="dark light">
-
-<link rel="stylesheet" href="/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MediaVault+</title>
+<link rel="canonical" href="https://mediavaultplus.app/privacy.html">
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url=/privacy.html">
+<script>location.replace("/privacy.html" + location.search + location.hash);</script>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-<header class="site-header">
-  <div class="wrap">
-    <a class="wordmark" href="/mediavaultplus/" aria-label="MediaVault+ home">MediaVault<span class="plus">+</span></a>
-    <nav class="nav" aria-label="Main">
-      <a href="/mediavaultplus/">App</a>
-      <a href="/mediavaultplus/privacy.html" aria-current="page">Privacy</a>
-      <a href="/mediavaultplus/support.html">Support</a>
-      <a href="/">VaultMedia</a>
-    </nav>
-  </div>
-</header>
-<div class="page">
-<main id="main" class="wrap" style="padding-top: clamp(32px, 6vw, 56px);">
-    <div class="columns">
-      <aside class="toc" aria-label="On this page">
-        <p>On this page</p>
-        <ol>
-          <li><a href="#privacy-account">Your collection and account</a></li>
-          <li><a href="#privacy-lookups">Searches, scans and background lookups</a></li>
-          <li><a href="#privacy-prices">Game prices</a></li>
-          <li><a href="#privacy-diagnostics">Images, feedback and diagnostics</a></li>
-          <li><a href="#privacy-deletion">Choices, retention and deletion</a></li>
-          <li><a href="#privacy-children">Advertising, children and changes</a></li>
-          <li><a href="#privacy-website">This website</a></li>
-        </ol>
-      </aside>
-      <article class="prose">
-        <h1>Privacy policy</h1>
-        <p class="meta">Last updated November 6, 2026 · MediaVault+ is operated by VaultMedia</p>
-
-        <div class="glance" role="region" aria-label="At a glance">
-          <div><b>No account needed</b><span>Keep your collection on your device without signing in.</span></div>
-          <div><b>Nothing sold</b><span>We don't sell your data or show targeted ads.</span></div>
-          <div><b>Photos aren't synced</b><span>Collection photos are never uploaded by sync.</span></div>
-          <div><b>Delete anytime</b><span>Delete Account in the app removes your account and cloud collection.</span></div>
-        </div>
-        <p style="margin-top:14px">Questions or privacy requests: <a href="mailto:support@mediavaultplus.app">support@mediavaultplus.app</a></p>
-
-        <h2 id="privacy-account">Your collection and account</h2>
-        <p>You can keep a collection on your device without an account. If you create an account, Supabase processes your sign-in details and account identifier. Apple or Google also processes sign-in information if you choose its sign-in option. Your profile can include a username, display name, bio, avatar and appearance preferences. We also record the app platform (iOS or Android).</p>
-        <p>When you use cloud collection sync while signed in, Supabase stores your collection entries and groups linked to your account. This includes the item identifiers and metadata, ratings, notes, purchase dates and prices, estimated values, purchase and shelf locations, condition and loan details you enter. <strong>Local collection photos remain on your device; they are not uploaded by collection sync.</strong> An avatar you choose to upload is stored online and has a public image URL.</p>
-        <p>Public profile and sharing features expose the profile information and collection items you choose to share. Private collection notes, purchase details and loan details are not intended as public sharing fields. Avoid putting sensitive information in your public profile or other shared text.</p>
-        <p>Your public profile can be discovered through username search, which shows your username, display name and avatar. When you follow someone, Supabase stores the follower and followed account identifiers and the time of the relationship. <strong>Other signed-in users can see who follows you and whom you follow</strong>, including those profiles and follower/following counts. These relationships are not private to you or the person followed. You can remove a relationship you created by unfollowing. This feature does not read your device address book.</p>
-        <p>If you report content, we keep the report, your account identifier and a copy of the reported text so we can review it. Reports are kept for 12 months after they are resolved. If you block someone, we store that block with both account identifiers so follows between you can be removed and refused; it is deleted if you unblock them or either account is deleted. We also record on your profile which version of the <a class="textlink" href="/mediavaultplus/terms.html">Terms of Use</a> you accepted, and when.</p>
-
-        <h2 id="privacy-lookups">Searches, scans and background lookups</h2>
-        <p>Searching or scanning sends the relevant barcode, ISBN, ISSN, title, platform or provider identifier to the services needed to find that item. These are not requests to upload your whole collection to those providers.</p>
-        <ul>
-          <li><strong>Supabase</strong> hosts our catalog proxy, shared catalog cache and lookup queue. The proxy forwards film and TV queries to TMDB, game queries to RAWG or IGDB, and barcode queries to EAN-Search. IGDB access uses our server's Twitch authentication; you do not need a Twitch account. Your app authentication is handled by our server rather than passed to these catalog providers.</li>
-          <li>The app also contacts <strong>UPCitemDB</strong> for barcodes, <strong>Discogs</strong> for music search and release details (including exact-barcode pressing confirmation), <strong>Open Library</strong> for book ISBNs, authors and editions, and <strong>OpenAlex</strong> for periodical ISSNs.</li>
-          <li>A signed-in scan that misses the cache can start a background lookup for supported formats. Depending on the format, our server checks Blu-ray.com for film/TV discs, LDDB for LaserDiscs, PriceCharting and IGDB for video games, or UPCitemDB/EAN-Search followed by BoardGameGeek for tabletop games. Music confirmation uses Discogs. Fetch Details can also request a supported lookup. Background lookup is not restricted to pressing Fetch Details.</li>
-          <li>Cover images load from the image hosts associated with the returned catalog records, such as TMDB, IGDB, RAWG, Discogs and Open Library. Those hosts receive the image request.</li>
-        </ul>
-        <p>Direct connections from your device reveal its network address to the destination service; server-side requests originate from our server. Providers may process technical request information under their own privacy policies. Our servers retain lookup requests, account-linked queue/rate-limit records and status information to deliver results, prevent abuse and diagnose failures. Shared catalog results can remain available to other users. Searches and scans are therefore not all transient or anonymous.</p>
-        <p>External links in the app, such as the eBay search link, open other sites and send the linked search details to those sites, whose own privacy practices apply.</p>
-
-        <h2 id="privacy-prices">Game prices</h2>
-        <p>PriceCharting supplies dated market-price observations, not the price you paid or a guaranteed resale value. Our shared cache retains product barcodes, source URLs and product identifiers, platform, capture times, labelled price points with currencies and availability, and evidence hashes. Older observations remain as history; these public product observations <strong>do not contain an account identifier</strong>.</p>
-        <p>A price refresh sends the barcode to our server and creates account-linked request/queue records. Refresh all game prices submits the eligible barcodes held in your local collection; the refresh service does not read your cloud collection to discover them. The server retrieves the product's prices from PriceCharting. The older title/platform value lookup also sends those item details to our server and PriceCharting. Request records can be retained separately from the public price observations. Refreshing market prices does not change the estimated value you entered.</p>
-
-        <h2 id="privacy-diagnostics">Images, feedback and diagnostics</h2>
-        <p>When image identification is used, our Supabase function sends the selected cover image or image URL to Google Cloud Vision for recognition. The app requires sign-in for this feature. It does not upload your photo library. Recognition requests are processed for the lookup; this feature does not create a collection-photo archive on our server.</p>
-        <p>Feedback submitted in the app is stored with your account. If you email support, we receive your address and the contents you send through our email service. Please do not send passwords or sensitive personal information.</p>
-        <p>Sentry receives crash reports and diagnostic context to help us fix faults. Reports can include app/device/OS information, errors and an account identifier when signed in. Reporting is enabled by default and <strong>can be disabled in Settings</strong>. The app disables default personal-information collection and production session replay. We do not use diagnostics for advertising or cross-app tracking.</p>
-        <p>The app also contacts Expo's update service to check for and download compatible app updates. These requests include technical app/runtime and platform information and normal network-request information.</p>
-
-        <h2 id="privacy-deletion">Choices, retention and deletion</h2>
-        <p>You can edit or delete collection information and choose whether to use account, cloud, sharing, lookup and image features. Camera and photo-library access use device permissions. You can turn off crash reporting in Settings.</p>
-        <p><strong>Delete Account</strong> in the app removes the account, profile, associated cloud collection/sharing data, feedback and stored avatars through our account-deletion service. Shared product metadata and price observations are not personal collection records and can remain. Some operational records can remain with the account reference removed. Account deletion is separate from copies on your device, exports, email correspondence and recipients' copies of information you shared. <a class="textlink" href="/mediavaultplus/support.html">Contact support</a> for help or a deletion request if you cannot access the app.</p>
-        <p>We retain account data to provide the features you use until it is removed, and operational/support records as needed to run and protect the service or meet legal requirements. We do not promise a fixed deletion period for third-party logs or backups. Network services use encrypted HTTPS connections; no system is completely secure.</p>
-
-        <h2 id="privacy-children">Advertising, children and changes</h2>
-        <p><strong>We do not sell personal information, serve targeted ads, or track you across other companies' apps and websites.</strong> The app is not directed to children under 13. Contact us if you believe a child has supplied personal information. We may update this policy as features change and will show the updated date here.</p>
-
-        <h2 id="privacy-website">This website</h2>
-        <p>These pages contain no analytics, tracking scripts or embedded third-party resources. GitHub Pages, our website host, processes normal web-request information to serve the pages. Following an external link takes you to that site's own service and privacy practices.</p>
-      </article>
-    </div>
-  </main>
-</div>
-<footer class="site-footer">
-  <div class="wrap">
-    <span><span class="company">VaultMedia</span> · <span class="year">© 2026</span></span>
-    <nav aria-label="Footer">
-      <a href="/mediavaultplus/">MediaVault<span class="plus">+</span></a>
-      <a href="/mediavaultplus/privacy.html">Privacy</a>
-      <a href="/mediavaultplus/support.html">Support</a>
-    </nav>
-  </div>
-</footer>
+<p>This page has moved to <a href="/privacy.html">mediavaultplus.app/privacy.html</a>.</p>
 </body>
 </html>
