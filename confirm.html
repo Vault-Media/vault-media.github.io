@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Email confirmed · MediaVault+</title>
-<meta name="description" content="Your MediaVault+ email address is confirmed. Go back to the app and sign in.">
+<title>Confirm your email · MediaVault+</title>
+<meta name="description" content="Open MediaVault+ to finish confirming your email address.">
 <meta name="color-scheme" content="dark light">
 <meta name="robots" content="noindex">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self'; script-src 'sha256-OK+q6UppWGWh3S42o2H+xCa5LAjQK8/Ia+x8R7n1nb4='; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self'; script-src 'sha256-oDObVQAdvpX/jYEX+I9ONuGHHvudhq7jEpKMPNondHc='; base-uri 'none'; form-action 'none'">
 <link rel="stylesheet" href="/style.css">
 <style>
   .open-app { display: inline-block; margin: 8px 0 20px; padding: 14px 28px; border-radius: 10px; background: var(--pink); color: #FFFFFF; font-weight: 700; text-decoration: none; }
@@ -32,6 +32,17 @@
 <div class="page">
 <main id="main" class="wrap" style="padding-top: clamp(32px, 6vw, 56px);">
     <article class="prose">
+      <div id="handoff" hidden>
+        <h1>Confirm your email</h1>
+        <p id="status">Opening MediaVault+…</p>
+        <a id="open-app" class="open-app" href="#">Open MediaVault+</a>
+        <p>Open this link on the phone where MediaVault+ is installed.</p>
+      </div>
+      <div id="incomplete" hidden>
+        <h1>This link can't be used</h1>
+        <p>This confirmation link is incomplete. If you already confirmed your account, open MediaVault+ and sign in.</p>
+        <p>If the app says your email is not confirmed, create the account again from the sign-in screen with the same email address and password. We will send a new confirmation email.</p>
+      </div>
       <div id="ok" hidden>
         <h1>Your email is confirmed</h1>
         <p>Go back to MediaVault+ and sign in with your email and password.</p>
@@ -62,19 +73,36 @@
   </div>
 </footer>
 <script>
-// Landing page after Supabase has already confirmed the account on its own server (the Confirm signup email links to Supabase, which then
-// redirects here). This page only reads the outcome from the address, shows a message and clears the address: a success redirect can carry a
-// code or session values in the query or fragment, and an error redirect carries error and error_code. Nothing is sent anywhere or stored.
+// Hand-off from the Supabase Confirm signup email to the app. The token hash arrives in the URL fragment (never sent to this web
+// server), is checked here, removed from the address bar, and passed only to the app's own vhsvault:// link. Nothing else loads.
+// Without a token (an older email that used Supabase's own confirmation link, or the redirect Supabase makes after confirming) this page
+// only reads the outcome from the address, shows a message and clears the address: nothing is sent anywhere or stored.
 (function () {
   var hash = new URLSearchParams(location.hash.replace(/^#/, ''));
   var query = new URLSearchParams(location.search);
   function get(name) { return hash.get(name) || query.get(name) || ''; }
+  function show(id) {
+    ['handoff', 'incomplete', 'ok', 'bad', 'idle'].forEach(function (k) { document.getElementById(k).hidden = k !== id; });
+  }
+  var hasToken = hash.has('token_hash');
+  var tokenHash = hash.get('token_hash') || '';
+  var type = hash.get('type') || '';
   var failed = get('error') !== '' || get('error_code') !== '' || get('error_description') !== '';
-  var succeeded = !failed && (get('code') !== '' || get('access_token') !== '' || get('token_hash') !== '' ||
+  var succeeded = !failed && (get('code') !== '' || get('access_token') !== '' ||
     /^(signup|email_change|email|invite)$/.test(get('type')));
+  // Clear the fragment so the token does not stay in the address bar or browser history entry.
   try { history.replaceState(null, '', location.pathname); } catch (e) { /* ignore */ }
-  if (failed || succeeded) document.getElementById('idle').hidden = true;
-  document.getElementById(failed ? 'bad' : succeeded ? 'ok' : 'idle').hidden = false;
+
+  if (hasToken) {
+    if (!/^[A-Za-z0-9_-]{16,128}$/.test(tokenHash) || type !== 'email') { show('incomplete'); return; }
+    var appLink = 'vhsvault://auth-callback?token_hash=' + encodeURIComponent(tokenHash) + '&type=email';
+    document.getElementById('open-app').setAttribute('href', appLink);
+    document.getElementById('status').textContent = "If the app didn't open, tap the button.";
+    show('handoff');
+    location.href = appLink;
+    return;
+  }
+  show(failed ? 'bad' : succeeded ? 'ok' : 'idle');
 })();
 </script>
 </body>
